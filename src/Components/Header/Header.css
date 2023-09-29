@@ -1,0 +1,16 @@
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px;
+}
+.signup_btn button{
+    border-radius: 10px;
+    background-color: none !important;
+    padding: 5px 20px 5px 20px;
+}
+.signup_btn_link{
+    text-decoration: none !important;
+    color: rgb(245, 239, 239) !important;
+    background-color:#4caf50;
+}

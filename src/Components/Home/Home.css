@@ -1,0 +1,10 @@
+.home_header{
+    display: flex;
+    align-items: center;
+vertical-align: middle;
+}
+.list ul{
+    display: flex;
+   gap: 30px;
+
+}
