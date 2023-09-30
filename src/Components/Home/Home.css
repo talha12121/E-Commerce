@@ -8,3 +8,20 @@ vertical-align: middle;
    gap: 30px;
 
 }
+.loading-spinner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+.card{
+    height: 300px !important ;
+    box-sizing: border-box;
+    border-radius: 20px !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
+    /* gap: 20px; */
+}
+.card img {
+    margin: 0 auto;
+    padding-top: 20px;
+}
