@@ -14,6 +14,7 @@ export default function Header({links , text}) {
         <div className="signup_btn">
           <button ><Link to={links} className="signup_btn_link">{text}</Link></button>
         </div>
+        
       </div>
     </>
   );

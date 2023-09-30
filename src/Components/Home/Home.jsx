@@ -1,60 +1,54 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import Header from "../Header/Header";
+import axios from "axios";
+import "./Home.css";
+import Loader from "../Loader/Loader";
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 
-const ResponsiveNavbar = () => {
-  const [drawerOpen, setDrawerOpen] = useState(false);
+export default function Home() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const toggleDrawer = () => {
-    setDrawerOpen(!drawerOpen);
-  };
+  useEffect(() => {
+    // Move the Axios code inside the useEffect hook to fetch data when the component mounts
+    axios
+      .get("https://fakestoreapi.com/products")
+      .then((response) => {
+        setProducts(response.data);
+        console.log(response.data)
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      });
+  }, []); // Empty dependency array to run the effect only once
 
   return (
-    <div>
-      {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <button
-          className="navbar-toggler"
-          type="button"
-          onClick={toggleDrawer}
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <a className="navbar-brand" href="#">
-          Your Logo
-        </a>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="#">
-                Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">
-                About
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      {/* Responsive Drawer */}
-      {drawerOpen && (
-        <div className="sidenav" style={{ width: drawerOpen ? '250px' : '0' }}>
-          <a href="#" onClick={toggleDrawer}>
-            Close Drawer
-          </a>
-          <a href="#">Link 1</a>
-          <a href="#">Link 2</a>
-          <a href="#">Link 3</a>
+    <>
+      <Header text="cart" />
+      {loading ? (
+        <Loader />
+      ) : (
+        <div className="container">
+          <h2 className="text-center mb-4">All Products</h2>
+          <div className="row">
+            {products.map((product) => (
+              <div className="col-lg-4 col-md-6 col-sm-12 mb-4" key={product.id}>
+                <Card>
+                  <Card.Img variant="top"style={{width:"40%" , height:"184px"}} src={product.image} />
+                  <Card.Body>
+                    <Card.Title style={{fontSize:"15px"}}>{product.title}</Card.Title>
+                    <Card.Title style={{fontSize:"15px"}}>Price = <span style={{color:"green"}}>${product.price}</span></Card.Title>
+                    {/* <Button variant="primary">View Details</Button> */}
+                  </Card.Body>
+                </Card>
+              </div>
+            ))}
+          </div>
         </div>
       )}
-
-      {/* Main Content */}
-      <div className="container mt-4">
-        <h1>Content Goes Here</h1>
-      </div>
-    </div>
+    </>
   );
-};
-
-export default ResponsiveNavbar;
+}
