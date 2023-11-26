@@ -7,6 +7,7 @@ import { getDatabase } from "firebase/database";
 const firebaseConfig = {
   apiKey: "AIzaSyD9Ap9WR8xW-SjNCDsDiqf5YYOCxdqK4aQ",
   authDomain: "shopping-app-7892a.firebaseapp.com",
+  databaseURL: "https://shopping-app-7892a-default-rtdb.firebaseio.com",
   projectId: "shopping-app-7892a",
   storageBucket: "shopping-app-7892a.appspot.com",
   messagingSenderId: "104491428580",

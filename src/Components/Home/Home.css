@@ -15,7 +15,8 @@ vertical-align: middle;
     height: 70vh;
 }
 .card{
-    height: 300px !important ;
+    margin-top: 10px;
+    /* height: 300px !important ; */
     box-sizing: border-box;
     border-radius: 20px !important;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px !important;
