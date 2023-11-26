@@ -29,7 +29,7 @@ const LoginForm = () => {
           title: "Good job!",
           text: "Login Successful",
         });
-        navigate("/home")
+        navigate("/dashboard")
         
      
       })

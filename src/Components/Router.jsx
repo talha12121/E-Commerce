@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Signup from "./Signup/Signup";
 import Login from "./Login/Login";
 import Home from "./Home/Home";
-import Detail from "./Details/Detail";
+import Dashboard from "./Dashboard/Dashboard";
+import UserDetail from "./Dashboard/UserDetail";
 
 
 export default function RouterApp() {
@@ -14,7 +15,9 @@ export default function RouterApp() {
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/home" element={<Home />} />
-      <Route path="/product/:productId" element={<Detail/>} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/details/:id" element={<UserDetail />} />
+     
        
       </Routes>
     </BrowserRouter>
