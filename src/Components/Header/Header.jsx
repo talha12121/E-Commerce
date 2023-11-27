@@ -3,7 +3,7 @@ import Logo from "../../assests/docLogo.png"
 import "./Header.css";
 import { Link } from "react-router-dom";
 
-export default function Header({links , text}) {
+export default function Header({links , text ,onClick}) {
 
   return (
     <>
@@ -14,7 +14,7 @@ export default function Header({links , text}) {
         </div>
         
         <div className="signup_btn">
-          <button ><Link to={links} className="signup_btn_link">{text}</Link></button>
+          <button onClick={onClick} ><Link to={links} className="signup_btn_link">{text}</Link></button>
         </div>
         
       </div>

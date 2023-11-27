@@ -3,41 +3,63 @@ import { getDatabase, ref, child, get } from 'firebase/database';
 import Loader from '../Loader/Loader';
 import Card from "react-bootstrap/Card";
 import { Link } from 'react-router-dom';
+import Header from '../Header/Header';
+import "./dashboard.css";
+import { useNavigate } from "react-router-dom"; 
 
 
 function Dashboard() {
   const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+  const navigate = useNavigate()
+  const getToken = localStorage.getItem("token")
   useEffect(() => {
-    const fetchData = async () => {
-      const dbRef = ref(getDatabase());
-      try {
-        const snapshot = await get(child(dbRef, 'users'));
-        if (snapshot.exists()) {
-          // If data exists, set it to the state
-          setUserData(Object.values(snapshot.val()));
-          setLoading(false)
-          console.log(snapshot.val());
-        } else {
-          console.log('No data available');
+    if(getToken){
+      const fetchData = async () => {
+        const dbRef = ref(getDatabase());
+        try {
+          const snapshot = await get(child(dbRef, 'users'));
+          if (snapshot.exists()) {
+            // If data exists, set it to the state
+            setUserData(Object.values(snapshot.val()));
+            setLoading(false)
+            console.log(snapshot.val());
+          } else {
+            console.log('No data available');
+          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
+      };
+      
+      fetchData();
+    }else{
+      navigate("/login")
+    }
   }, []); 
 
+
+  const Logout = () => {
+    const getToken = localStorage.getItem("token");
+    const removeToken = () => {
+      localStorage.removeItem("token");
+    };
+      if (getToken) {
+      removeToken();
+      navigate("/login");
+    } else {
+      console.log("Token not found");
+    }
+  };
+  
   return (
     <>
-    
+    <Header text={"Logout"} onClick={Logout}/>
     {loading ? (
       <Loader />
     ) : (
       <div className="container">
-      <h2 className="text-center mb-4">All Users</h2>
+      <h2 className="text-center mt-4">All Users</h2>
       <div className="row">
              {userData.map((data, index) => (
               <div  className="col-lg-4 col-md-6 col-sm-12 mb-4" style={{cursor:"pointer"}} key={index}>

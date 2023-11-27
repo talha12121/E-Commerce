@@ -11,16 +11,15 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 
-const SignupForm = ({setUser}) => {
-  
-    
-    const [data, setData] = useState({
+const SignupForm = () => {
+ const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
     gender: "",
     age:"",
     experience:"",
+    file:""
   });
   const db = getDatabase();
   const navigate = useNavigate();
@@ -67,6 +66,7 @@ const SignupForm = ({setUser}) => {
           });
         }
       });
+      
   };
   const [activeTab , setActiveTab] = useState("doctor")
   const changeStatus = (tab) => {
@@ -130,14 +130,14 @@ const SignupForm = ({setUser}) => {
         
       />
     </div>
-        <div className="form-group">
+        {/* <div className="form-group">
       <label>Upload Image</label>
       <input
         type="file"
-        onChange={(e) => setData({ ...data, experience: e.target.value })}
+        onChange={(e) => setData({ ...data, file: e.target.value })}
         
       />
-    </div>
+    </div> */}
         <button type="submit">Signup</button>
         <div className="not_account">
           <p>
