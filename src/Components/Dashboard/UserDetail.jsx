@@ -3,16 +3,21 @@ import React, { useEffect, useState } from "react";
 import { getDatabase, ref, child, get } from "firebase/database";
 import Loader from "../Loader/Loader";
 import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import Header from "../Header/Header";
+import { useNavigate } from "react-router-dom";
 
 function UserDetail() {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
 
+  const getToken = localStorage.getItem("token")
   const id = useParams();
-  console.log(id);
+ const navigate = useNavigate()
 
   useEffect(() => {
+    if(getToken){
+
     const fetchData = async () => {
       const dbRef = ref(getDatabase());
       try {
@@ -20,8 +25,10 @@ function UserDetail() {
         if (snapshot.exists()) {
           setUserData(snapshot.val());
           setLoading(false);
+        
         } else {
           console.log("No data available");
+          
         }
       } catch (error) {
         console.error(error);
@@ -29,14 +36,31 @@ function UserDetail() {
     };
 
     fetchData();
+  }else{
+    navigate("/login")
+  }
   }, [id.id]);
+  const Logout = () => {
+    const getToken = localStorage.getItem("token");
+    const removeToken = () => {
+      localStorage.removeItem("token");
+    };
+      if (getToken) {
+      removeToken();
+      navigate("/login");
+    } else {
+      console.log("Token not found");
+    }
+  };
   return (
     <>
-    <Header text={"Details"} />
+    <Header text={"Logout"} onClick={Logout}/>
       {loading ? (
         <Loader />
       ) : (
         <div className="container">
+      <h2 className="text-center mt-4">User Details </h2>
+
           <div className="row">
             <div
               className="col-md-12 "              
@@ -44,7 +68,7 @@ function UserDetail() {
               <Card>
                 <Card.Img
                   variant="top"
-                  style={{ width: "30%", height: "184px" }}
+                  style={{ width: "20%", height: "184px" }}
                   src={
                     userData.image
                       ? userData.image
@@ -67,7 +91,10 @@ function UserDetail() {
                   <Card.Title style={{ fontSize: "15px" }}>
                     Experience = {userData.experience ? userData.experience + " year" : 'NIL'}
                   </Card.Title>
-                  {/* <Button variant="primary">View Details</Button> */}
+                  
+                  {userData.role == "doctor" ?
+                   <Button className="appoint_btn" variant="primary">Book An Appointment</Button>
+                   : ""}
                 </Card.Body>
               </Card>
             </div>

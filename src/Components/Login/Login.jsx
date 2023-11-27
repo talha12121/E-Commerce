@@ -17,7 +17,7 @@ const LoginForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+   localStorage.setItem("token" , Math.random())
     const auth = getAuth();
     signInWithEmailAndPassword(auth, data.email, data.password)
      .then((userCredential) => {

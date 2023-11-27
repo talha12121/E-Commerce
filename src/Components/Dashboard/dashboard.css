@@ -1,23 +1,37 @@
 .bg_img {
-    background-image: url(../../assests/hero.jpeg);
-    background-size: cover;
-    width: 100%;
-    height: 70vh; /* Set the height to 100% of the viewport height */
-    background-repeat: no-repeat;
-  }
-  .doc_list h1{
-    text-align: center;
-    margin-top:40px;
-  }
-  .doc_list hr{
-    width: 80%;
-   margin: 0 auto;
-  }
-  .doc_cards{
-    margin-top: 20px;
-    padding: 50px;
-    display:flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
+  background-image: url(../../assests/hero.jpeg);
+  background-size: cover;
+  width: 100%;
+  height: 70vh; /* Set the height to 100% of the viewport height */
+  background-repeat: no-repeat;
+}
+.doc_list h1 {
+  text-align: center;
+  margin-top: 40px;
+}
+.doc_list hr {
+  width: 80%;
+  margin: 0 auto;
+}
+.doc_cards {
+  margin-top: 20px;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.card-body {
+  color: black !important;
+}
+a {
+  text-decoration: none !important;
+}
+.appoint_btn {
+  border: none !important;
+  width: 50%;
+  padding: 10px 0px 10px 0px !important;
+  margin: 10px auto !important;
+  display: flex !important;
+  justify-content: center !important;
+}
