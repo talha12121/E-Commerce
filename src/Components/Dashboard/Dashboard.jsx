@@ -6,11 +6,13 @@ import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import "./dashboard.css";
 import { useNavigate } from "react-router-dom"; 
+import { all } from 'axios';
 
 
 function Dashboard() {
   const [userData, setUserData] = useState([]);
   const [loading, setLoading] = useState(true);
+  
   const navigate = useNavigate()
   const getToken = localStorage.getItem("token")
   useEffect(() => {
@@ -20,10 +22,11 @@ function Dashboard() {
         try {
           const snapshot = await get(child(dbRef, 'users'));
           if (snapshot.exists()) {
-            // If data exists, set it to the state
-            setUserData(Object.values(snapshot.val()));
+            const allUsers = Object.values(snapshot.val());
+            setUserData(allUsers);
+            
             setLoading(false)
-            console.log(snapshot.val());
+            
           } else {
             console.log('No data available');
           }
@@ -37,7 +40,6 @@ function Dashboard() {
       navigate("/login")
     }
   }, []); 
-
 
   const Logout = () => {
     const getToken = localStorage.getItem("token");
@@ -71,6 +73,7 @@ function Dashboard() {
                     <Card.Title style={{fontSize:"15px"}}>Name = {data.name}</Card.Title>
                     <Card.Title style={{fontSize:"15px"}}>Email = {data.email}</Card.Title>
                     <Card.Title style={{fontSize:"15px"}}>Gender = {data.gender}</Card.Title>
+                    <Card.Title style={{fontSize:"15px"}}>Role = {data.role}</Card.Title>
                     {/* <Button variant="primary">View Details</Button> */}
                   </Card.Body>
                 </Link>
