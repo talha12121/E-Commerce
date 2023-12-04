@@ -5,76 +5,101 @@ import { Link } from "react-router-dom";
 import "./Signup.css";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import { auth, database } from "../../config.jsx";
+import { auth , storage} from "../../config.jsx";
 import { getDatabase, ref, set } from "firebase/database";
 import { createUserWithEmailAndPassword } from "firebase/auth";
+// import  storage  from '../../config.jsx';
+import { uploadBytesResumable, getDownloadURL, ref as ss } from 'firebase/storage';
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 
 const SignupForm = () => {
- const [data, setData] = useState({
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [data, setData] = useState({
     name: "",
     email: "",
     password: "",
     gender: "",
-    age:"",
-    experience:"",
-    file:""
+    age: "",
+    experience: "",
+    image: "",
   });
   const db = getDatabase();
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState("doctor");
 
-  const handleSubmit = (e ) => {
+  const handleChange = (e) => {
+    const file = e.target.files[0];
+    setData({ ...data, image: file });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-       
-        set(ref(db, "users/" + user.uid), {
-          uid: user.uid,
-          name: data.name,
-          email: data.email,
-          gender: data.gender,
-          role:activeTab,
-          age:data.age ? data.age : "",
-          experience: data.experience ? data.experience : "",
-        }).then(() => {
-          Swal.fire({
-            icon: "success",
-            title: "Good job!",
-            text: "Signup Successful",
-          });
-          
-          
-        });
-        navigate("/login");
-      })
-      .catch((error) => {
-        console.log(error)
-        if (data.email.length === 0 || data.password.length === 0) {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Fields Cant be Empty",
-          });
-        } else {
-          console.log(data.email.length);
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Email already exist",
+
+    if (!data.image) {
+      alert("Please select an image");
+      return;
+    }
+
+    if (data.image.type !== "image/jpeg" && data.image.type !== "image/png") {
+      alert("Select only PNG, JPEG, or JPG");
+      return;
+    }
+
+    setUploadingImage(true);
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+      const user = userCredential.user;
+
+      const storageRef = ss(storage, `users/${user.uid}`);
+      const uploadTask = uploadBytesResumable(storageRef, data.image);
+
+      uploadTask.on(
+        "state_changed",
+        null,
+        (error) => {
+          console.error("Error uploading image:", error.message);
+          alert("Error uploading image. Please try again.");
+          setUploadingImage(false);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            set(ref(db, "users/" + user.uid), {
+              uid: user.uid,
+              name: data.name,
+              email: data.email,
+              gender: data.gender,
+              role: activeTab,
+              age: data.age ? data.age : "",
+              experience: data.experience ? data.experience : "",
+              image: downloadURL,
+            }).then(() => {
+              Swal.fire({
+                icon: "success",
+                title: "Good job!",
+                text: "Signup Successful",
+              });
+
+              navigate("/login");
+            });
+            setUploadingImage(false);
           });
         }
-      });
-      
+      );
+    } catch (error) {
+      console.error("Error during image upload:", error.message);
+      alert("Error during image upload. Please try again.");
+      setUploadingImage(false);
+    }
   };
-  const [activeTab , setActiveTab] = useState("doctor")
+
   const changeStatus = (tab) => {
     setActiveTab(tab);
-    
   };
-  
 
+  
+  
 
   return (
     <>
@@ -130,14 +155,13 @@ const SignupForm = () => {
         
       />
     </div>
-        {/* <div className="form-group">
+        <div className="form-group">
       <label>Upload Image</label>
       <input
-        type="file"
-        onChange={(e) => setData({ ...data, file: e.target.value })}
-        
+        type="file" 
+        onChange={handleChange}
       />
-    </div> */}
+    </div>
         <button type="submit">Signup</button>
         <div className="not_account">
           <p>

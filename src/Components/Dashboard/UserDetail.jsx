@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 function UserDetail() {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
+  const [appoint, setAppoint] = useState(false);
+ 
 
   const getToken = localStorage.getItem("token")
   const id = useParams();
@@ -52,6 +54,12 @@ function UserDetail() {
       console.log("Token not found");
     }
   };
+
+  const appointment = ()=>{
+   
+  setAppoint(true)
+  console.log(appoint)
+  }
   return (
     <>
     <Header text={"Logout"} onClick={Logout}/>
@@ -93,7 +101,7 @@ function UserDetail() {
                   </Card.Title>
                   
                   {userData.role == "doctor" ?
-                   <Button className="appoint_btn" variant="primary">Book An Appointment</Button>
+                   <Button className="appoint_btn" variant="primary" onClick={appointment}>Book An Appointment</Button>
                    : ""}
                 </Card.Body>
               </Card>
