@@ -15,10 +15,15 @@ import {
 } from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
+import Loader from "../Loader/Loader.jsx";
 
 const SignupForm = () => {
   const [uploadingImage, setUploadingImage] = useState(false);
   const [activeTab, setActiveTab] = useState("doctor");
+  const [loading, setLoading] = useState(false)
+
+  let sleep = () => new Promise((r) => setTimeout(r, 2000))
+
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -42,7 +47,9 @@ const SignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true)
+    await sleep()
+    setLoading(false)
     if (!data.image) {
       alert("Please select an image");
       return;
@@ -109,7 +116,7 @@ const SignupForm = () => {
   return (
     <>
       <Header links={"/login"} text={"Login"} />
-      <div className=" customTabs">
+      <div className="customTabs">
         <div onClick={() => changeStatus("patient")}>Patient</div>
         <div onClick={() => changeStatus("doctor")}>Doctor</div>
       </div>
@@ -162,7 +169,7 @@ const SignupForm = () => {
               <label>Upload Image</label>
               <input type="file" onChange={handleChange} />
             </div>
-            <button type="submit">Signup</button>
+            <button type="submit">{loading ? <Loader width='30px' height='50px' color="#ffffff" /> : "SignUp"  } </button>
             <div className="not_account">
               <p>
                 Have an account <Link to="/login">Login </Link>
@@ -216,7 +223,7 @@ const SignupForm = () => {
               <label>Upload Image</label>
               <input type="file" onChange={handleChange} />
             </div>
-            <button type="submit">Signup</button>
+            <button type="submit">{loading ? <Loader width='30px' height='50px' color="#ffffff"  /> : "SignUp"  } </button>
             <div className="not_account">
               <p>
                 Have an account <Link to="/login">Login </Link>
