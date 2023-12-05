@@ -12,6 +12,10 @@ vertical-align: middle;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 4vh;
+}
+.dash-spinner{
+    
     height: 70vh;
 }
 .card{

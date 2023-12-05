@@ -6,6 +6,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Swal from "sweetalert2";
 import { getDatabase, ref, child, get } from "firebase/database";
 import { Link, useNavigate } from "react-router-dom";
+import Loader from "../Loader/Loader";
 
 const LoginForm = () => {
   const navigate  = useNavigate()
@@ -14,8 +15,11 @@ const LoginForm = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = (e) => {
+  let sleep = () => new Promise((r) => setTimeout(r, 1000))
+  const handleSubmit = async (e) => {
+   
     e.preventDefault();
    localStorage.setItem("token" , Math.random())
     const auth = getAuth();
@@ -48,6 +52,9 @@ const LoginForm = () => {
         });
       }
       });
+      setLoading(true)
+      await sleep()
+      setLoading(false)
   };
 
   return (
@@ -73,7 +80,7 @@ const LoginForm = () => {
               
             />
           </div>
-          <button type="submit">Login</button>
+          <button type="submit">{loading ? <Loader width='30px' height='50px' color="#ffffff"  /> : "Login"  }</button>
           <div className="not_account">
             <p>
               Dont have an account <Link to="/signup">Create an account</Link>

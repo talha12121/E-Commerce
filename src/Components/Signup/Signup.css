@@ -62,4 +62,12 @@
     border: none !important;
     padding: 15px !important;
   }
-  
+  .customTabs div{
+    padding: 7px 15px;
+    border-radius: 15px;
+    background: #4caf50;
+    color: white;
+  }
+  .not_account{
+    margin-top: 10px;
+  }
