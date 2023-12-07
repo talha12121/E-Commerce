@@ -14,7 +14,7 @@ export default function Header({links , text ,onClick}) {
         </div>
         
         <div className="signup_btn">
-          <button onClick={onClick} ><Link to={links} className="signup_btn_link">{text}</Link></button>
+        <Link to={links} className="signup_btn_link"><button onClick={onClick} >{text}</button></Link>
         </div>
         
       </div>

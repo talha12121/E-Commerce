@@ -26,6 +26,7 @@ function UserDetail() {
         const snapshot = await get(child(dbRef, `users/${id.id}`));
         if (snapshot.exists()) {
           setUserData(snapshot.val());
+          console.log(snapshot.val());
           setLoading(false);
         
         } else {

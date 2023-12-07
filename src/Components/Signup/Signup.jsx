@@ -67,9 +67,10 @@ const SignupForm = () => {
         auth,
         data.email,
         data.password
+        
       );
       const user = userCredential.user;
-
+      
       const storageRef = ss(storage, `users/${user.uid}`);
       const uploadTask = uploadBytesResumable(storageRef, data.image);
 
