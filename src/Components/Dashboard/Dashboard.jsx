@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { getDatabase, ref, child, get } from 'firebase/database';
+import { onAuthStateChanged } from 'firebase/auth';
 import Loader from '../Loader/Loader';
 import Card from "react-bootstrap/Card";
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
 import "./dashboard.css";
 import { useNavigate } from "react-router-dom"; 
-import { all } from 'axios';
-
+import {auth} from "../../config"
 
 function Dashboard() {
   const [userData, setUserData] = useState([]);
+  const [currentUserData, setCurrentUserData] = useState([]);
   const [loading, setLoading] = useState(true);
-  
+ 
+  // const currentUserUid = currentuser.uid;
+  // console.log(currentUserUid)
+ 
+
   const navigate = useNavigate()
   const getToken = localStorage.getItem("token")
   useEffect(() => {
@@ -53,6 +58,30 @@ function Dashboard() {
       console.log("Token not found");
     }
   };
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const fetchData = async () => {
+          const dbRef = ref(getDatabase());
+          try {
+            const snapshot = await get(child(dbRef, `users/${user.uid}`));
+            if (snapshot.exists()) {
+              const currentUser = snapshot.val();
+              console.log(currentUser);
+              setCurrentUserData(currentUser);
+            } else {
+              console.log('No data available');
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+        fetchData();
+      }
+    }, []);
+  
+    return () => unsubscribe(); 
+  }, []);
   
   return (
     <>
@@ -62,7 +91,10 @@ function Dashboard() {
       
     ) : (
       <div className="container">
-      <h2 className="text-center mt-4">All Users</h2>
+      <h2 className="text-center mt-4">User:{currentUserData.name}</h2>
+
+      {console.log(currentUserData.name)}
+     
       <div className="row">
              {userData.map((data, index) => (
               <div  className="col-lg-4 col-md-6 col-sm-12 mb-4" style={{cursor:"pointer"}} key={index}>
