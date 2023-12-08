@@ -65,7 +65,7 @@ function UserDetail() {
     <>
     <Header text={"Logout"} onClick={Logout}/>
       {loading ? (
-        <Loader />
+        <Loader width={80} height={80} color="#4fa94d" />
       ) : (
         <div className="container">
       <h2 className="text-center mt-4">User Details </h2>

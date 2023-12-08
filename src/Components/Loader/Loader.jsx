@@ -1,8 +1,11 @@
 import React from 'react';
 import { TailSpin } from "react-loader-spinner";
-
+// import Dashboard from '../Dashboard/Dashboard';
+import { useEffect } from 'react';
 export default function Loader({ width, height, color }) {
-    const isDashboard = window.location.pathname === '/dashboard';
+    
+        const isDashboard = window.location.pathname === '/dashboard';
+
 
     return (
         <>
