@@ -1,6 +1,5 @@
 import React from "react";
 import Logo from "../../assests/logo.png";
-import "../Header/Header.css";
 import { Link } from "react-router-dom";
 import "./Signup.css";
 import { useState } from "react";

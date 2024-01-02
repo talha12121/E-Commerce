@@ -3,6 +3,7 @@ import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, Space } from 'antd';
 import defaultLogo from "../../assests/default_img.png"
 import { useUserContext } from '../Redux/Context';
+import { FaUser } from "react-icons/fa6";
 const items = [
   {
     label: <a href="">Profile</a>,
@@ -27,9 +28,9 @@ console.log(filteredUsers)
         trigger={['click']}
         >
     <a onClick={(e) => e.preventDefault()}>
-      <Space >
-        
-        <img width={35} style={{borderRadius:"50%" , cursor:"pointer"}} src={defaultLogo} alt="" />
+      <Space className="cursor-pointer " >
+      <FaUser color='black' size={20} className='cursor-pointer' />
+        {/* <img width={35} style={{borderRadius:"50%" , cursor:"pointer"}} src={defaultLogo} alt="" /> */}
         
       </Space>
     </a>

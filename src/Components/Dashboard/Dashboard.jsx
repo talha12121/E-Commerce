@@ -5,7 +5,6 @@ import Loader from '../Loader/Loader';
 import Card from "react-bootstrap/Card";
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header';
-import "./dashboard.css";
 import { useNavigate } from "react-router-dom"; 
 import {auth} from "../../config"
 import defaultLogo from "../../assests/default_img.png"
@@ -93,6 +92,7 @@ function Dashboard() {
   return (
     <>
     <Header text={"Logout"} onClick={Logout}/>
+    
     {loading ? (
       <Loader width={80} height={80} color="#4fa94d" />
       
@@ -102,30 +102,30 @@ function Dashboard() {
       <div className="row">
         {filteredUsers.map((s) => s.role).join('') === "doctor"  ?
        filteredPatient.map((data, index) => (   
-        <div  className="col-lg-4 col-md-6 col-sm-12 mb-4" style={{cursor:"pointer"}} key={index}>
-          <Card>
+        <div  className="col-lg-4 col-md-6 col-sm-12 mb-4 cursor-pointer"  key={index}>
+          <Card className='!no-underline'>
             <Link to={`/details/${data.uid}`}>
             <Card.Img variant="top"style={{width:"100%" , height:"184px" , objectFit:"contain"}} src={data.image? data.image : defaultLogo } />
             <Card.Body>
-              <Card.Title style={{fontSize:"15px"}}>Name = {data.name}</Card.Title>
-              <Card.Title style={{fontSize:"15px"}}>Email = {data.email}</Card.Title>
-              <Card.Title style={{fontSize:"15px"}}>Gender = {data.gender}</Card.Title>
-              <Card.Title style={{fontSize:"15px"}}>Role = {data.role}</Card.Title>
+              <Card.Title className="!text-[15px] !text-black">Name = {data.name}</Card.Title>
+              <Card.Title className="!text-[15px] !text-black">Email = {data.email}</Card.Title>
+              <Card.Title className="!text-[15px] !text-black">Gender = {data.gender}</Card.Title>
+              <Card.Title className="!text-[15px] !text-black">Role = {data.role}</Card.Title>
             </Card.Body>
           </Link>
           </Card>
         </div>
       )):
       filteredDoctor.map((data, index) => (
-        <div  className="col-lg-4 col-md-6 col-sm-12 mb-4" style={{cursor:"pointer"}} key={index}>
+        <div  className="col-lg-4 col-md-6 col-sm-12 mb-4 cursor-pointer"  key={index}>
           <Card>
-            <Link to={`/details/${data.uid}`}>
+            <Link to={`/details/${data.uid}`} className='no-underline'>
             <Card.Img variant="top"style={{width:"100%" , height:"184px" , objectFit:"contain"}} src={data.image ? data.image :defaultLogo } />
             <Card.Body>
-              <Card.Title style={{fontSize:"15px"}}>Name = {data.name}</Card.Title>
-              <Card.Title style={{fontSize:"15px"}}>Email = {data.email}</Card.Title>
-              <Card.Title style={{fontSize:"15px"}}>Gender = {data.gender}</Card.Title>
-              <Card.Title style={{fontSize:"15px"}}>Role = {data.role}</Card.Title>
+              <Card.Title className="!text-[15px] !text-black ">Name = {data.name}</Card.Title>
+              <Card.Title className="!text-[15px] !text-black ">Email = {data.email}</Card.Title>
+              <Card.Title className="!text-[15px] !text-black ">Gender = {data.gender}</Card.Title>
+              <Card.Title className="!text-[15px] !text-black ">Role = {data.role}</Card.Title>
             </Card.Body>
           </Link>
           </Card>
