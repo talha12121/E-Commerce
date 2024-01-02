@@ -1,23 +1,17 @@
 import React from "react";
 import Logo from "../../assests/docLogo.png"
-import "./Header.css";
-import { Link } from "react-router-dom";
 import DropDown from "./Dropdown";
-import Dashboard from "../Dashboard/Dashboard";
-export default function Header({links , text ,onClick}) {
-  
-  
+export default function Header() {
+ 
   return (
     <>
-   
-      <div className="header">
-        <div className="header_logo">
-          <img src={Logo} alt="" style={{mixBlendMode:"color-burn"}} width={"100px"} />
-          <span style={{fontWeight:"bold" , fontFamily:"sans-serif" , color:"#004a4a"}}>DocFind</span>
+      <div className=" d-flex justify-between items-center pt-1 pl-2 pb-1 pr-3 shadow-md">
+        <div className="d-flex items-center ">
+          <img src={Logo} alt="" className="mix-blend-color-burn w-14"/>
+          <span className="font-bold font-sans" style={{color:"#004a4a"}}>DocFind</span>
         </div>
         
-        <div className="signup_btn">
-        <Link to={links} className="signup_btn_link"><button onClick={onClick} >{text}</button></Link>
+        <div >
           <DropDown/>
         </div>
         
