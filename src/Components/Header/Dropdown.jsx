@@ -13,6 +13,14 @@ const items = [
     label: <a href="">Logout</a>,
     key: '1',
   },
+  {
+    label: <a href="/signup">Sign up</a>,
+    key: '2',
+  },
+  {
+    label: <a href="/login">Login</a>,
+    key: '3',
+  },
  
 ];
 
