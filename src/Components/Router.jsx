@@ -4,6 +4,7 @@ import Signup from "./Signup/Signup";
 import Login from "./Login/Login";
 import Dashboard from "./Dashboard/Dashboard";
 import UserDetail from "./Dashboard/UserDetail";
+import Home from "./Dashboard/Home";
 
 
 export default function RouterApp() {
@@ -15,6 +16,7 @@ export default function RouterApp() {
         <Route path="/Login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/details/:id" element={<UserDetail />} />
+        <Route path="/home" element={<Home />} />
      
        
       </Routes>
