@@ -33,7 +33,7 @@ const LoginForm = () => {
           title: "Good job!",
           text: "Login Successful",
         });
-        navigate("/dashboard")
+        navigate("/home")
         
      
       })
