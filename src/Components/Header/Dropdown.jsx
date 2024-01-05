@@ -2,7 +2,6 @@ import React from 'react';
 import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, Space } from 'antd';
 import defaultLogo from "../../assests/default_img.png"
-import { useUserContext } from '../Redux/Context';
 import { FaUser } from "react-icons/fa6";
 const items = [
   {
@@ -25,8 +24,7 @@ const items = [
 ];
 
 const DropDown = () => {
-    const { filteredUsers } = useUserContext();
-console.log(filteredUsers)
+   
     return(
 
         <Dropdown
