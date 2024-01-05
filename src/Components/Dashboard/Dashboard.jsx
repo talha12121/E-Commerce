@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { getDatabase, ref, child, get  } from 'firebase/database';
 import { onAuthStateChanged } from 'firebase/auth';
 import Loader from '../Loader/Loader';
@@ -8,13 +8,14 @@ import Header from '../Header/Header';
 import { useNavigate } from "react-router-dom"; 
 import {auth} from "../../config"
 import defaultLogo from "../../assests/default_img.png"
-import { useUserContext } from '../Redux/Context';
+import NoteContext from "../Context/NoteContext"
+
 
 function Dashboard() {
   const [userData, setUserData] = useState([]);
   const [currentUserData, setCurrentUserData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { updateFilteredUsers } = useUserContext(); 
+ const {userContext , setUserContext} = useContext(NoteContext)
 
   const navigate = useNavigate()
   const getToken = localStorage.getItem("token")
@@ -69,8 +70,11 @@ function Dashboard() {
             const snapshot = await get(child(dbRef, `users/${user.uid}`));
             if (snapshot.exists()) {
               const currentUser = snapshot.val();
-              console.log(currentUser);
+             
               setCurrentUserData(currentUser);
+              setUserContext(currentUser)
+              
+             
             } else {
               console.log('No data available');
             }

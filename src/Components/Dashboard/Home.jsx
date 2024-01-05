@@ -8,7 +8,7 @@ function Home() {
   return (
     <>
       <Header />
-       {/* <Hero /> */}
+       <Hero />
        <MiddleSection />
     </>
   );
