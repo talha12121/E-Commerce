@@ -1,7 +1,6 @@
 import React from "react";
 import Logo from "../../assests/logo.png";
 import { Link } from "react-router-dom";
-import "./Signup.css";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { auth, storage } from "../../config.jsx";
