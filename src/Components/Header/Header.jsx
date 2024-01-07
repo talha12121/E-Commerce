@@ -10,7 +10,7 @@ export default function Header() {
     console.log(userContext)
    
   
-  }, [])
+  }, [userContext])
   
   return (
     <>
@@ -23,7 +23,7 @@ export default function Header() {
         <div className="flex items-center gap-2">
           <DropDown/> 
           <div className="font-bold text-[18px]" > 
-          {userContext.name && userContext.name}
+          {/* {userContext && userContext.name} */}
 
           </div>
         </div>
