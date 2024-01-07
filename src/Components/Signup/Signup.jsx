@@ -116,39 +116,43 @@ const SignupForm = () => {
   return (
     <>
       <Header links={"/login"} text={"Login"} />
-      <div className="customTabs">
-        <div onClick={() => changeStatus("patient")}>Patient</div>
-        <div onClick={() => changeStatus("doctor")}>Doctor</div>
+      <div className="flex justify-center text-black gap-20 border-none p-3.5 cursor-pointer">
+        <div className="bg-[#4caf50] rounded-2xl text-white py-1.5 px-4" onClick={() => changeStatus("patient")}>Patient</div>
+        <div className="bg-[#4caf50] rounded-2xl text-white py-1.5 px-4" onClick={() => changeStatus("doctor")}>Doctor</div>
       </div>
 
       {activeTab === "doctor" ? (
-        <div className="login-form-container" style={{ marginTop: "140px" }}>
-          <form className="login-form" onSubmit={handleSubmit}>
-            <h2>Signup For Doctor</h2>
-            <div className="form-group">
-              <label>Name</label>
+        <div className="flex justify-center items-center h-[70vh]" style={{ marginTop: "140px" }}>
+          <form className="shadow-lg w-[500px] p-7 rounded-2xl" onSubmit={handleSubmit}>
+            <h2 className="text-[#846464] font-[Times New Roman', Times, serif] text-center">Signup For Doctor</h2>
+            <div className="mb-3.5">
+              <label className="text-[#333] mb-1 block">Name</label>
               <input
+              className="w-[100%] p-2.5 rounded border bg-white"
                 type="text"
                 onChange={(e) => setData({ ...data, name: e.target.value })}
               />
             </div>
-            <div className="form-group">
-              <label>Email</label>
+            <div className="mb-3.5">
+              <label className="text-[#333] mb-1 block">Email</label>
               <input
+              className="w-[100%] p-2.5 rounded border bg-white"
                 type="email"
                 onChange={(e) => setData({ ...data, email: e.target.value })}
               />
             </div>
-            <div className="form-group">
-              <label>Password</label>
+            <div className="mb-3.5">
+              <label className="text-[#333] mb-1 block">Password</label>
               <input
+              className="w-[100%] p-2.5 rounded border bg-white"
                 type="password"
                 onChange={(e) => setData({ ...data, password: e.target.value })}
               />
             </div>
-            <div className="form-group">
-              <label>Gender</label>
+            <div className="mb-3.5">
+              <label className="text-[#333] mb-1 block">Gender</label>
               <select
+              className="w-[100%] p-2.5 rounded border bg-white"
                 onChange={(e) => setData({ ...data, gender: e.target.value })}
               >
                 <option value="">Select</option>
@@ -156,54 +160,61 @@ const SignupForm = () => {
                 <option value="Female">Female</option>
               </select>
             </div>
-            <div className="form-group">
-              <label>Experience</label>
+            <div className="mb-3.5">
+              <label className="text-[#333] mb-1 block">Experience</label>
               <input
+              className="w-[100%] p-2.5 rounded border bg-white"
                 type="text"
                 onChange={(e) =>
                   setData({ ...data, experience: e.target.value })
                 }
               />
             </div>
-            <div className="form-group">
-              <label>Upload Image</label>
-              <input type="file" onChange={handleChange} />
+            <div className="mb-3.5">
+              <label className="text-[#333] mb-1 block">Upload Image</label>
+              <input
+              className="w-[100%] p-2.5 rounded border bg-white" type="file" onChange={handleChange} />
             </div>
-            <button type="submit">{loading ? <Loader width='30px' height='50px' color="#ffffff" /> : "SignUp"  } </button>
-            <div className="not_account">
+            <button
+            className="w-[100%] p-2.5 border-none rounded bg-[#4caf50] text-[#fff] cursor-pointer"
+            type="submit">{loading ? <Loader width='30px' height='50px' color="#ffffff" /> : "SignUp"  } </button>
+            <div className="flex justify-center mt-1">
               <p>
-                Have an account <Link to="/login">Login </Link>
+                Have an account <Link className="no-underline" to="/login">Login </Link>
               </p>
             </div>
           </form>
         </div>
       ) : (
-        <div className="login-form-container" style={{ marginTop: "140px" }}>
-          <form className="login-form" onSubmit={handleSubmit}>
-            <h2>Signup For Patient</h2>
-            <div className="form-group">
-              <label>Name</label>
+        <div className="flex justify-center items-center h-[70vh]" style={{ marginTop: "140px" }}>
+          <form className="shadow-lg w-[500px] p-7 rounded-2xl" onSubmit={handleSubmit}>
+            <h2 className="text-[#846464] font-[Times New Roman', Times, serif] text-center">Signup For Patient</h2>
+            <div className="mb-3.5">
+              <label className="text-[#333] mb-1 block">Name</label>
               <input
+              className="w-[100%] p-2.5 rounded border bg-white"
                 type="text"
                 onChange={(e) => setData({ ...data, name: e.target.value })}
               />
             </div>
-            <div className="form-group">
-              <label>Email</label>
+            <div className="mb-3.5">
+              <label className="text-[#333] mb-1 block">Email</label>
               <input
+              className="w-[100%] p-2.5 rounded border bg-white"
                 type="email"
                 onChange={(e) => setData({ ...data, email: e.target.value })}
               />
             </div>
-            <div className="form-group">
-              <label>Password</label>
+            <div className="mb-3.5">
+              <label className="text-[#333] mb-1 block">Password</label>
               <input
+              className="w-[100%] p-2.5 rounded border bg-white"
                 type="password"
                 onChange={(e) => setData({ ...data, password: e.target.value })}
               />
             </div>
-            <div className="form-group">
-              <label>Gender</label>
+            <div className="mb-3.5">
+              <label className="text-[#333] mb-1 block">Gender</label>
               <select
                 onChange={(e) => setData({ ...data, gender: e.target.value })}
               >
@@ -212,21 +223,25 @@ const SignupForm = () => {
                 <option value="Female">Female</option>
               </select>
             </div>
-            <div className="form-group">
-              <label>Age</label>
+            <div className="mb-3.5">
+              <label className="text-[#333] mb-1 block">Age</label>
               <input
+              className="w-[100%] p-2.5 rounded border bg-white"
                 type="number"
                 onChange={(e) => setData({ ...data, age: e.target.value })}
               />
             </div>
-            <div className="form-group">
-              <label>Upload Image</label>
-              <input type="file" onChange={handleChange} />
+            <div className="mb-3.5">
+              <label className="text-[#333] mb-1 block">Upload Image</label>
+              <input
+              className="w-[100%] p-2.5 rounded border bg-white" type="file" onChange={handleChange} />
             </div>
-            <button type="submit">{loading ? <Loader width='30px' height='50px' color="#ffffff"  /> : "SignUp"  } </button>
-            <div className="not_account">
+            <button
+            className="w-[100%] p-2.5 border-none rounded bg-[#4caf50] text-[#fff] cursor-pointer"
+            type="submit">{loading ? <Loader width='30px' height='50px' color="#ffffff"  /> : "SignUp"  } </button>
+            <div className="flex justify-center mt-1">
               <p>
-                Have an account <Link to="/login">Login </Link>
+                Have an account <Link className="no-underline" to="/login">Login </Link>
               </p>
             </div>
           </form>

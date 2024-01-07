@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "../Header/Header";
-import "./Login.css";
 import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Swal from "sweetalert2";
@@ -61,29 +60,35 @@ const LoginForm = () => {
     <>
       <Header links={"/signup"} text={"Sign Up"}/>
 
-      <div className="login-form-container">
-        <form className="login-form" onSubmit={handleSubmit}>
-          <h2>Login</h2>
-          <div className="form-group">
-            <label>Email</label>
+      <div className="flex justify-center items-center h-[70vh]">
+        <form className="shadow-lg w-[500px] p-7 rounded-2xl" onSubmit={handleSubmit}>
+          <h2 className="text-[#846464] font-[Times New Roman', Times, serif] text-center">Login</h2>
+          <div className="mb-3.5">
+            <label className="text-[#333] mb-1 block">Email</label>
             <input
+            className="w-[100%] p-2.5 rounded border"
               type={"email"}
               onChange={(e) => setData({ ...data, email: e.target.value })}
               
             />
           </div>
-          <div className="form-group">
-            <label>Password</label>
+          <div className="mb-3.5">
+            <label className="text-[#333] mb-1 block">Password</label>
             <input
+            className="w-[100%] p-2.5 rounded border"
               type={"password"}
               onChange={(e) => setData({ ...data, password: e.target.value })}
               
             />
           </div>
-          <button type="submit">{loading ? <Loader width='30px' height='50px' color="#ffffff"  /> : "Login"  }</button>
-          <div className="not_account">
+          <button 
+          className="w-[100%] p-2.5 border-none rounded bg-[#4caf50] text-[#fff] cursor-pointer"
+           type="submit">
+            {loading ? <Loader width='30px' height='50px' color="#ffffff"  /> : "Login"  }
+            </button>
+          <div className="flex justify-center mt-1">
             <p>
-              Dont have an account <Link to="/signup">Create an account</Link>
+              Dont have an account <Link className="no-underline" to="/signup">Create an account</Link>
             </p>
           </div>
         </form>
