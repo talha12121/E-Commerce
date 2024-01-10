@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Logo from "../../assests/logo.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -15,11 +15,13 @@ import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import Loader from "../Loader/Loader.jsx";
 
+
 const SignupForm = () => {
   const [uploadingImage, setUploadingImage] = useState(false);
   const [activeTab, setActiveTab] = useState("doctor");
   const [loading, setLoading] = useState(false)
-
+  
+  
   let sleep = () => new Promise((r) => setTimeout(r, 2000))
 
   const [data, setData] = useState({
@@ -101,6 +103,7 @@ const SignupForm = () => {
               navigate("/login");
             });
             setUploadingImage(false);
+            
           });
         }
       );
@@ -215,6 +218,7 @@ const SignupForm = () => {
             <div className="mb-3.5">
               <label className="text-[#333] mb-1 block">Gender</label>
               <select
+              className="w-[100%] p-2.5 rounded border bg-white"
                 onChange={(e) => setData({ ...data, gender: e.target.value })}
               >
                 <option value="">Select</option>
