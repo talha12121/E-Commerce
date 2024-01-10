@@ -5,12 +5,11 @@ import NoteContext from "../Context/NoteContext";
 
 
 export default function Header() {
-  const {userContext}  = useContext(NoteContext)
-  useEffect(() => {
-    console.log(userContext)
-   
-  
-  }, [userContext])
+  const { userContext } = useContext(NoteContext);
+  const getToken = localStorage.getItem("token")
+
+  console.log(userContext)
+
   
   return (
     <>
@@ -20,10 +19,10 @@ export default function Header() {
           <span className="font-bold font-sans" style={{color:"#004a4a"}}>DocFind</span>
         </div>
         
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center gap-2">
           <DropDown/> 
-          <div className="font-bold text-[18px]" > 
-          {/* {userContext && userContext.name} */}
+          <div className="font-bold text-[17px]" > 
+          {getToken && (userContext ? userContext.name : "") }
 
           </div>
         </div>
