@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useContext } from "react";
 import { getDatabase, ref, child, get } from "firebase/database";
 import Loader from "../Loader/Loader";
 import Card from "react-bootstrap/Card";
@@ -7,11 +7,12 @@ import Button from "react-bootstrap/Button";
 import Header from "../Header/Header";
 import { useNavigate } from "react-router-dom";
 import defaultLogo from "../../assests/default_img.png"
+import NoteContext from "../Context/NoteContext";
 function UserDetail() {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   const [appoint, setAppoint] = useState(false);
- 
+ const {userContext , setUserContext} = useContext(NoteContext)
 
   const getToken = localStorage.getItem("token")
   const id = useParams();
@@ -43,18 +44,7 @@ function UserDetail() {
     navigate("/login")
   }
   }, [id.id]);
-  const Logout = () => {
-    const getToken = localStorage.getItem("token");
-    const removeToken = () => {
-      localStorage.removeItem("token");
-    };
-      if (getToken) {
-      removeToken();
-      navigate("/login");
-    } else {
-      console.log("Token not found");
-    }
-  };
+  
 
   const appointment = ()=>{
    
@@ -63,7 +53,7 @@ function UserDetail() {
   }
   return (
     <>
-    <Header text={"Logout"} onClick={Logout}/>
+    <Header />
       {loading ? (
         <Loader width={80} height={80} color="#4fa94d" />
       ) : (
@@ -93,6 +83,7 @@ function UserDetail() {
                   </Card.Title>
                   <Card.Title className="!text-[15px]">
                     Experience = {userData.experience ? userData.experience + " year" : 'NIL'}
+                   
                   </Card.Title>
                   
                 </Card.Body>
