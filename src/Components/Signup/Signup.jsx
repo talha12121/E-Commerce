@@ -22,7 +22,7 @@ const SignupForm = () => {
   const [loading, setLoading] = useState(false)
   
   
-  let sleep = () => new Promise((r) => setTimeout(r, 2000))
+  let sleep = () => new Promise((r) => setTimeout(r, 3000))
 
   const [data, setData] = useState({
     name: "",
@@ -101,7 +101,7 @@ const SignupForm = () => {
               });
 
               navigate("/login");
-            });
+            })
             setUploadingImage(false);
             
           });

@@ -1,30 +1,20 @@
 import React ,{useContext, useEffect, useState} from "react";
 import Logo from "../../assests/docLogo.png"
 import DropDown from "./Dropdown";
-import NoteContext from "../Context/NoteContext";
-
 
 export default function Header() {
-  const { userContext } = useContext(NoteContext);
-  const getToken = localStorage.getItem("token")
-
-  console.log(userContext)
-
   
-  return (
+return (
     <>
-      <div className=" d-flex justify-between items-center pt-1 pl-2 pb-1 pr-3 shadow-md">
-        <div className="d-flex items-center ">
-          <img src={Logo} alt="" className="mix-blend-color-burn w-14"/>
+      <div className="shadow-xl flex justify-between items-center pt-1 pl-2 pb-1 pr-3 shadow-md">
+        <a href="/home" className="d-flex items-center no-underline">
+          <img  src={Logo} alt="" className=" w-14"/>
           <span className="font-bold font-sans" style={{color:"#004a4a"}}>DocFind</span>
-        </div>
+        </a>
         
-        <div className="flex items-center justify-center gap-2">
+        <div className="flex items-center justify-end">
           <DropDown/> 
-          <div className="font-bold text-[17px]" > 
-          {getToken && (userContext ? userContext.name : "") }
-
-          </div>
+          
         </div>
         
       </div>
