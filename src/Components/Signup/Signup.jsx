@@ -1,28 +1,21 @@
-import React, { useContext } from "react";
-import Logo from "../../assests/logo.png";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { auth, storage } from "../../config.jsx";
 import { getDatabase, ref, set } from "firebase/database";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import {
-  uploadBytesResumable,
-  getDownloadURL,
-  ref as ss,
-} from "firebase/storage";
+import { uploadBytesResumable,getDownloadURL,ref as ss,} from "firebase/storage";
 import { useNavigate } from "react-router-dom";
 import Header from "../Header/Header";
 import Loader from "../Loader/Loader.jsx";
-
 
 const SignupForm = () => {
   const [uploadingImage, setUploadingImage] = useState(false);
   const [activeTab, setActiveTab] = useState("doctor");
   const [loading, setLoading] = useState(false)
   
-  
-  let sleep = () => new Promise((r) => setTimeout(r, 3000))
+  let sleep = () => new Promise((r) => setTimeout(r, 5000))
 
   const [data, setData] = useState({
     name: "",
@@ -47,9 +40,9 @@ const SignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true)
-    await sleep()
-    setLoading(false)
+    // setLoading(true)
+    // await sleep()
+    // setLoading(false)
     if (!data.image) {
       alert("Please select an image");
       return;
@@ -112,6 +105,9 @@ const SignupForm = () => {
       alert("Error during image upload. Please try again.");
       setUploadingImage(false);
     }
+      setLoading(true)
+        await sleep()
+        setLoading(false)
   };
 
   
