@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import NoteContext from './NoteContext';
 
-export default function NoteState({ children }) {
+const NoteState = (props) => {
   const [userContext, setUserContext] = useState(null);
 
+ 
   return (
     <NoteContext.Provider value={{ userContext, setUserContext }}>
-      {children}
+      {props.children}
     </NoteContext.Provider>
   );
-}
+};
+
+export default NoteState;

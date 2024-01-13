@@ -3,17 +3,20 @@ import Header from "../Header/Header";
 import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Swal from "sweetalert2";
-import { getDatabase, ref, child, get } from "firebase/database";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../Loader/Loader";
 
+
 const LoginForm = () => {
+  
   const navigate  = useNavigate()
 
   const [data, setData] = useState({
     email: "",
     password: "",
+    
   });
+  
   const [loading, setLoading] = useState(false)
   
   let sleep = () => new Promise((r) => setTimeout(r, 1000))
@@ -26,7 +29,7 @@ const LoginForm = () => {
      .then((userCredential) => {
 
         const user = userCredential.user;
-        console.log("done");
+        
         Swal.fire({
           icon: "success",
           title: "Good job!",

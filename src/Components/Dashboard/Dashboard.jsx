@@ -15,7 +15,7 @@ function Dashboard() {
   const [userData, setUserData] = useState([]);
   const [currentUserData, setCurrentUserData] = useState([]);
   const [loading, setLoading] = useState(true);
- const {userContext , setUserContext} = useContext(NoteContext)
+ let  {setUserContext} = useContext(NoteContext)
 
   const navigate = useNavigate()
   const getToken = localStorage.getItem("token")
@@ -72,7 +72,7 @@ function Dashboard() {
               const currentUser = snapshot.val();
              
               setCurrentUserData(currentUser);
-              setUserContext(currentUser)
+              setUserContext (currentUser)
               
              
             } else {

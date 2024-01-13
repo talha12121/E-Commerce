@@ -10,6 +10,8 @@ import book from "../../assests/book.png";
 import search from "../../assests/search.png";
 import check from "../../assests/check.png";
 import docImage from "../../assests/doctorImage.png";
+import tickSvg from "../../assests/yellow_tick_svg.svg";
+import { Link } from "react-router-dom";
 
 function MiddleSection() {
   const navigate = useNavigate();
@@ -187,7 +189,11 @@ function MiddleSection() {
                             </span>
                         </li>
                     </ul>
-                    <div className="text-center p-2.5 w-[45%] max-md:w-[100%] cursor-pointer bg-[#006]"><a href="/dashboard" className="font-light text-white  md:mt-2 no-underline">Find a doctor</a></div>
+                    <Link className="no-underline" to="/dashboard">
+                      <div className="text-center p-2.5 w-[45%] max-md:w-[100%] cursor-pointer bg-[#006]">
+                      <div  className="font-light text-white  md:mt-2 no-underline">Find a doctor</div>
+                      </div>
+                      </Link>
                 </div>
                 <div className="col-12 col-md-5 order-md-1">
                     <div className="mx-auto mb-3 md:mb-2">
@@ -200,6 +206,36 @@ function MiddleSection() {
             </div>
         </div>
     </div>
+    {/* ///////////////////////////////////////////////////////// */}
+    <section className="bg-[#f5f5f5] pt-4 pt-md-0">
+        <div className="container">
+            <div className="row items-end justify-center">
+                <div className="col-12 col-md-6 order-md-2">
+                    <header className=" md:hidden text-center pb-2">
+                        <h2 className="mb-2">Are you a five-star doctor?</h2>
+                        <p>Sign-up to reach millions of patients</p>
+                    </header>
+                    <img className="mx-auto" src="https://d1t78adged64l7.cloudfront.net/frontend/assets/images/phones.png" />
+                </div>
+                <div className="col-12 col-md-5 py-4 py-md-5 order-md-1 px-3 ">
+                    <header className="hidden md:block">
+                        <h2 className="mb-2">Are you a five-star doctor?</h2>
+                        <p>Sign-up to reach millions of patients</p>
+                    </header>
+                    <ul className="py-2 py-md-4 list-unstyled text-left ">
+                       <li  className="mb-2"><span className="flex gap-2"><img src={tickSvg} alt="" /> Get more appointments through online bookings</span></li>
+                        <li className="mb-2"><span className="flex gap-2"><img src={tickSvg} alt="" /> Create and view patient records from anywhere</span></li>
+                        <li className="mb-2"><span className="flex gap-2"><img src={tickSvg} alt="" /> Manage your schedule efficiently</span></li>
+                  </ul>
+                    <Link className="no-underline" to="/login">
+                      <div className="text-center p-2.5 w-[45%] max-md:w-[100%] cursor-pointer bg-[#006]">
+                      <div  className="font-light text-white  md:mt-2 no-underline">Join Now</div>
+                      </div>
+                      </Link>
+                </div>
+            </div>
+        </div>
+    </section>
     </>
   );
 }
