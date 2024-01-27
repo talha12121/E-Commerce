@@ -8,14 +8,14 @@ import Header from '../Header/Header';
 import { useNavigate } from "react-router-dom"; 
 import {auth} from "../../config"
 import defaultLogo from "../../assests/default_img.png"
-import NoteContext from "../Context/NoteContext"
+
 
 
 function Dashboard() {
   const [userData, setUserData] = useState([]);
   const [currentUserData, setCurrentUserData] = useState([]);
   const [loading, setLoading] = useState(true);
- let  {setUserContext} = useContext(NoteContext)
+
 
   const navigate = useNavigate()
   const getToken = localStorage.getItem("token")
@@ -48,19 +48,7 @@ function Dashboard() {
   }, []); 
 
 
-  const Logout = () => {
-    console.log("x")
-    // const getToken = localStorage.getItem("token");
-    // const removeToken = () => {
-    //   localStorage.removeItem("token");
-    // };
-    //   if (!getToken) {
-    //   removeToken();
-    //   navigate("/login");
-    // } else {
-    //   console.log("Token not found");
-    // }
-  };
+  
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -72,7 +60,7 @@ function Dashboard() {
               const currentUser = snapshot.val();
              
               setCurrentUserData(currentUser);
-              setUserContext (currentUser)
+              
               
              
             } else {
@@ -95,7 +83,7 @@ function Dashboard() {
 
   return (
     <>
-    <Header text={"Logout"} onClick={Logout}/>
+    <Header />
     
     {loading ? (
       <Loader width={80} height={80} color="#4fa94d" />

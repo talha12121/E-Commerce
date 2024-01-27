@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../Header/Header";
 import { useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../Loader/Loader";
-
+import {auth} from "../../config"
+import { getDatabase, ref, child, get  } from 'firebase/database';
 
 const LoginForm = () => {
   
@@ -18,7 +19,7 @@ const LoginForm = () => {
   });
   
   const [loading, setLoading] = useState(false)
-  
+  const [currentUserData, setCurrentUserData] = useState([]);
   let sleep = () => new Promise((r) => setTimeout(r, 1000))
   const handleSubmit = async (e) => {
    
@@ -59,6 +60,34 @@ const LoginForm = () => {
       setLoading(false)
   };
 
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const fetchData = async () => {
+          const dbRef = ref(getDatabase());
+          try {
+            const snapshot = await get(child(dbRef, `users/${user.uid}`));
+            if (snapshot.exists()) {
+              const currentUser = snapshot.val();
+             
+              setCurrentUserData(currentUser);
+             localStorage.setItem("currentUserData" , JSON.stringify(currentUser))
+              
+             
+            } else {
+              console.log('No data available');
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        };
+        fetchData();
+      }
+      
+     
+    }, []);
+    return () => unsubscribe(); 
+  }, []);
   return (
     <>
       <Header links={"/signup"} text={"Sign Up"}/>
