@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import React, { useEffect, useState , useContext } from "react";
-import { getDatabase, ref, child, get } from "firebase/database";
+import { getDatabase, ref, child, get ,set , push} from "firebase/database";
 import Loader from "../Loader/Loader";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
@@ -12,12 +12,14 @@ function UserDetail() {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   const [appoint, setAppoint] = useState(false);
- const {userContext , setUserContext} = useContext(NoteContext)
+//  const {userContext , setUserContext} = useContext(NoteContext)
 
   const getToken = localStorage.getItem("token")
   const id = useParams();
  const navigate = useNavigate()
-
+ const getCurrentUSerData = localStorage.getItem("currentUserData")
+  const JsonCurrentUSerData = JSON.parse(getCurrentUSerData)
+  console.log(JsonCurrentUSerData)
   useEffect(() => {
     if(getToken){
 
@@ -46,11 +48,22 @@ function UserDetail() {
   }, [id.id]);
   
 
-  const appointment = ()=>{
-   
-  setAppoint(true)
-  console.log(appoint)
-  }
+  const appointment = () => {
+    const db = getDatabase();
+    const appointmentsRef = ref(db, `users/${id.id}/appointments`);
+    const newAppointment = {
+      data: JsonCurrentUSerData, 
+    };
+    const newAppointmentRef = push(appointmentsRef);
+    set(newAppointmentRef, newAppointment)
+      .then(() => {
+        console.log("Appointment added successfully!");
+        setAppoint(true);
+      })
+      .catch((error) => {
+        console.error("Error adding appointment: ", error);
+      });
+  };
   return (
     <>
     <Header />

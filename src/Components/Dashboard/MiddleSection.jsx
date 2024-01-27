@@ -18,13 +18,13 @@ function MiddleSection() {
   return (
     <>
       <div className="d-flex justify-center gap-3 mt-4">
-        <div className="flex gap-2 border rounded max-md:!block">
+        <div className="flex gap-2 border border-zinc-600 rounded max-md:!block">
           <div className="bg-[#fff3e8] w-[50%] d-flex justify-center items-center max-md:!w-[100%] max-md:h-[50%]">
             <img src={svg1} alt="" />
           </div>
           <div>
-            <p className="font-bold !mb-0 mt-2 max-md:text-sm ">Doc Care</p>
-            <p className="max-md:text-sm">
+            <p className="font-bold !mb-0 mt-2 max-md:text-sm max-md:ml-2 ">Doc Care</p>
+            <p className="max-md:text-sm max-md:ml-2">
               Instant Video Consultation with Top Doctors
             </p>
             <p
@@ -35,15 +35,15 @@ function MiddleSection() {
             </p>
           </div>
         </div>
-        <div className="flex gap-2 border rounded max-md:!block">
+        <div className="flex gap-2 border border-zinc-600 rounded max-md:!block">
           <div className="bg-[#e8f1ff] w-[50%] d-flex justify-center items-center max-md:!w-[100%] max-md:h-[50%]">
             <img src={svg2} alt="" />
           </div>
           <div>
-            <p className="font-bold !mb-0 mt-2 max-md:text-sm">
-              Doctors Online Now
+            <p className="font-bold !mb-0 mt-2 max-md:text-sm max-md:ml-2">
+         Doctors Online Now
             </p>
-            <p className="max-md:text-sm">
+            <p className="max-md:text-sm max-md:ml-2">
               Instant Video Consultation with Top Doctors
             </p>
             <p
@@ -60,70 +60,73 @@ function MiddleSection() {
         <h2 className="d-flex justify-center mt-5 ">
           Find doctors by health concern
         </h2>
-        <div className="row justify-center gap-x-8  mt-4 m-0 max-md:gapx-3">
-            <div className="col-3 col-md-1  mb-3">
-                <div>
-                <div className="rounded-full w-[56px] cursor-pointer h-[56px] flex justify-center items-center  p-2 bg-[#333385] text-white">
-              <FaEye />
+        <div className="row justify-center gap-x-8 mt-4 m-0 max-md:gap-x-3">
+    <div className="col-3 col-md-1 mb-3">
+        <div className="flex flex-col items-center">
+            <div className="rounded-full w-[56px] h-[56px] flex justify-center items-center p-2 bg-[#333385] text-white">
+                <FaEye />
             </div>
-                    <span>Gynecologist</span>
-                </div>
-            </div>
-            <div className="col-3 col-md-1  mb-3">
-                <div >
-                <div className="rounded-full w-[56px] cursor-pointer h-[56px] flex justify-center items-center  p-2 bg-[#333385] text-white">
-              <FaEye />
-            </div>
-                    <span>Skin Specialist</span>
-                </div>
-            </div>
-            <div className="col-3 col-md-1 mb-3">
-                <div >
-                <div className="rounded-full w-[56px] cursor-pointer h-[56px] flex justify-center items-center  p-2 bg-[#333385] text-white">
-              <FaEye />
-            </div>
-                    <span>Child Specialist</span>
-                </div>
-            </div>
-            <div className="col-3 col-md-1  mb-3">
-               <div>
-                <div className="rounded-full w-[56px] cursor-pointer h-[56px] flex justify-center items-center  p-2 bg-[#333385] text-white">
-              <FaEye />
-            </div>
-                    <span>Orthopedic Surgeon</span>
-                </div>
-            </div>
-            <div className="col-3 col-md-1  mb-3">
-                <div className="rounded-full w-[56px] cursor-pointer h-[56px] flex justify-center items-center  p-2 bg-[#333385] text-white">
-              <FaEye />
-            </div>
-                    <span className="text-center w-[100%]">ENT Specialist</span>
-            </div>
-            <div className="col-3 col-md-1  mb-3">
-                
-                <div className="rounded-full w-[56px] cursor-pointer h-[56px] flex justify-center items-center  p-2 bg-[#333385] text-white">
-              <FaEye />
-            </div>
-                    <span>Diagnostics</span>
-            </div>
-            <div className="col-3 col-md-1  mb-3">
-                
-                <div className="rounded-full w-[56px] cursor-pointer h-[56px] flex justify-center items-center  p-2 bg-[#333385] text-white">
-              <FaEye />
-            </div>
-                    <span>Diabetes specialist</span>
-                </div>
-            
-            <div className="col-3 col-md-1  mb-3">
-                
-                <div className="rounded-full w-[56px] cursor-pointer h-[56px] flex justify-center items-center  p-2 bg-[#333385] text-white">
-              <FaEye />
-            </div>
-                    <span>Eye Specialist</span>
-                
-            </div>
-            
+            <span className="mt-2 text-center">Gynecologist</span>
         </div>
+    </div>
+    <div className="col-4 col-md-1 mb-3">
+        <div className="flex flex-col items-center">
+            <div className="rounded-full w-[56px] h-[56px] flex justify-center items-center p-2 bg-[#333385] text-white">
+                <FaEye />
+            </div>
+            <span className="mt-2 text-center">Skin Specialist</span>
+        </div>
+    </div>
+    <div className="col-3 col-md-1 mb-3">
+        <div className="flex flex-col items-center">
+            <div className="rounded-full w-[56px] h-[56px] flex justify-center items-center p-2 bg-[#333385] text-white">
+                <FaEye />
+            </div>
+            <span className="mt-2 text-center">Child Specialist</span>
+        </div>
+    </div>
+    <div className="col-3 col-md-1 mb-3">
+        <div className="flex flex-col items-center">
+            <div className="rounded-full w-[56px] h-[56px] flex justify-center items-center p-2 bg-[#333385] text-white">
+                <FaEye />
+            </div>
+            <span className="mt-2 text-center">Orthopedic Surgeon</span>
+        </div>
+    </div>
+    <div className="col-3 col-md-1 mb-3">
+        <div className="flex flex-col items-center">
+            <div className="rounded-full w-[56px] h-[56px] flex justify-center items-center p-2 bg-[#333385] text-white">
+                <FaEye />
+            </div>
+            <span className="mt-2 text-center w-[100%]">ENT Specialist</span>
+        </div>
+    </div>
+    <div className="col-3 col-md-1 mb-3">
+        <div className="flex flex-col items-center">
+            <div className="rounded-full w-[56px] h-[56px] flex justify-center items-center p-2 bg-[#333385] text-white">
+                <FaEye />
+            </div>
+            <span className="mt-2 text-center">Diagnostics</span>
+        </div>
+    </div>
+    <div className="col-3 col-md-1 mb-3">
+        <div className="flex flex-col items-center">
+            <div className="rounded-full w-[56px] h-[56px] flex justify-center items-center p-2 bg-[#333385] text-white">
+                <FaEye />
+            </div>
+            <span className="mt-2 text-center">Diabetes specialist</span>
+        </div>
+    </div>
+    <div className="col-3 col-md-1 mb-3">
+        <div className="flex flex-col items-center">
+            <div className="rounded-full w-[56px] h-[56px] flex justify-center items-center p-2 bg-[#333385] text-white">
+                <FaEye />
+            </div>
+            <span className="mt-2 text-center">Eye Specialist</span>
+        </div>
+    </div>
+</div>
+
       </div>
 
       {/* ///////////////////////////////////////// */}
