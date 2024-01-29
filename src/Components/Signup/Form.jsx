@@ -33,7 +33,7 @@ const Form = ({ showInputText, role }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-     if (!data.image || !data.name || !data.email || !data.password || !data.gender || !data.age ? !data.age : data.experience  ) {
+     if (!data.image || !data.name || !data.email || !data.password || !data.gender || data.age ? !data.age : !data.experience  ) {
         Swal.fire({
             icon: "error",
             title: "Oops...",
