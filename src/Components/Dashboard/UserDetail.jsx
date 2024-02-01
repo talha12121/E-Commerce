@@ -12,14 +12,14 @@ function UserDetail() {
   const [userData, setUserData] = useState({});
   const [loading, setLoading] = useState(true);
   const [appoint, setAppoint] = useState(false);
-//  const {userContext , setUserContext} = useContext(NoteContext)
+ const {userContext , setUserContext} = useContext(NoteContext)
 
   const getToken = localStorage.getItem("token")
   const id = useParams();
  const navigate = useNavigate()
  const getCurrentUSerData = localStorage.getItem("currentUserData")
   const JsonCurrentUSerData = JSON.parse(getCurrentUSerData)
-  console.log(JsonCurrentUSerData)
+
   useEffect(() => {
     if(getToken){
 
@@ -30,6 +30,8 @@ function UserDetail() {
         if (snapshot.exists()) {
           setUserData(snapshot.val());
           console.log(snapshot.val());
+          setUserContext(snapshot.val())
+          console.log("userContext" , userContext)
           setLoading(false);
         
         } else {
@@ -52,18 +54,24 @@ function UserDetail() {
     const db = getDatabase();
     const appointmentsRef = ref(db, `users/${id.id}/appointments`);
     const newAppointment = {
-      data: JsonCurrentUSerData, 
+        data: JsonCurrentUSerData,
     };
-    const newAppointmentRef = push(appointmentsRef);
-    set(newAppointmentRef, newAppointment)
-      .then(() => {
-        console.log("Appointment added successfully!");
-        setAppoint(true);
-      })
-      .catch((error) => {
-        console.error("Error adding appointment: ", error);
-      });
-  };
+    console.log("New Appointment Data:", newAppointment);
+    const newAppointmentRef = push(appointmentsRef); // Generates a unique key
+    const appointmentKey = newAppointmentRef.key; // Get the generated key
+    const appointmentPath = `users/${id.id}/appointments/${appointmentKey}`;
+    
+    set(ref(db, appointmentPath), newAppointment)
+        .then(() => {
+            console.log("Appointment added successfully!");
+            setAppoint(true);
+        })
+        .catch((error) => {
+            console.error("Error adding appointment: ", error);
+        });
+};
+
+  
   return (
     <>
     <Header />
