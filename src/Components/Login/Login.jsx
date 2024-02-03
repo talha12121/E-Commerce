@@ -58,36 +58,37 @@ const LoginForm = () => {
       setLoading(true)
       await sleep()
       setLoading(false)
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
+          const fetchData = async () => {
+            const dbRef = ref(getDatabase());
+            try {
+              const snapshot = await get(child(dbRef, `users/${user.uid}`));
+              if (snapshot.exists()) {
+                const currentUser = snapshot.val();
+               
+                setCurrentUserData(currentUser);
+               localStorage.setItem("currentUserData" , JSON.stringify(currentUser))
+                
+               
+              } else {
+                console.log('No data available');
+              }
+            } catch (error) {
+              console.error(error);
+            }
+          };
+          fetchData();
+        }
+        
+       
+      }, []);
+      return () => unsubscribe(); 
   };
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const fetchData = async () => {
-          const dbRef = ref(getDatabase());
-          try {
-            const snapshot = await get(child(dbRef, `users/${user.uid}`));
-            if (snapshot.exists()) {
-              const currentUser = snapshot.val();
-             
-              setCurrentUserData(currentUser);
-             localStorage.setItem("currentUserData" , JSON.stringify(currentUser))
-              
-             
-            } else {
-              console.log('No data available');
-            }
-          } catch (error) {
-            console.error(error);
-          }
-        };
-        fetchData();
-      }
-      
-     
-    }, []);
-    return () => unsubscribe(); 
-  }, []);
+  
+   
+
   return (
     <>
       <Header links={"/signup"} text={"Sign Up"}/>
